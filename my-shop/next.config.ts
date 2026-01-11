@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-
 const repo = "new-website";
 
 const nextConfig: NextConfig = {
@@ -8,6 +7,9 @@ const nextConfig: NextConfig = {
   assetPrefix: `/${repo}/`,
   trailingSlash: true,
   images: { unoptimized: true },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: `/${repo}`,
+  },
 };
 
 export default nextConfig;
