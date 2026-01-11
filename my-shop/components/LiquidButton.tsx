@@ -166,14 +166,15 @@ const GradientSvg: React.FC<GradientSvgProps> = ({
 
     const variants = {
         hovered: {
-            gradientTransform: gradientTransform,
-            transition: { duration: 50, repeat: Infinity, ease: 'linear' },
+            gradientTransform,
+            transition: { duration: 50, repeat: Infinity, ease: [0, 0, 1, 1] },
         },
         notHovered: {
-            gradientTransform: gradientTransform,
-            transition: { duration: 10, repeat: Infinity, ease: 'linear' },
+            gradientTransform,
+            transition: { duration: 10, repeat: Infinity, ease: [0, 0, 1, 1] },
         },
     };
+
 
     return (
         <svg
@@ -197,7 +198,10 @@ const GradientSvg: React.FC<GradientSvgProps> = ({
                     cy='0'
                     r='1'
                     gradientUnits='userSpaceOnUse'
-                    animate={isHovered ? variants.hovered : variants.notHovered}
+                    animate={(isHovered ? variants.hovered : variants.notHovered) as Record<string, any>
+
+                    }
+
                 >
                     {stopsAnimationArray.map((stopConfigs, index) => (
                         <AnimatePresence key={index}>
@@ -212,7 +216,7 @@ const GradientSvg: React.FC<GradientSvgProps> = ({
                                 }}
                                 transition={{
                                     duration: 0,
-                                    ease: 'linear',
+                                    ease: [0, 0, 1, 1],
                                     repeat: Infinity,
                                 }}
                             />
@@ -304,7 +308,7 @@ export default function LiquidButton() {
                         : "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)",
                     y: isHovered ? -3 : 0,
                 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.3, ease: [0, 0, 0.58, 1] }}
             >
                 {/* Background */}
                 <div className="absolute inset-0 bg-black rounded-2xl" />
