@@ -4,7 +4,6 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FeaturesParticleCanvas from "@/components/FeaturesParticleCanvas";
 import LiquidCard from "@/components/LiquidCard";
-import FeatureCard from "@/components/FeatureCard";
 import ProductCard from "@/components/ProductCard";
 import ContactSection from "@/components/ContactSection";
 import LiquidButton from "@/components/LiquidButton";
@@ -16,12 +15,7 @@ import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-const featureCards = [
-  { icon: "shield_check", iconGradient: "bg-gradient-to-br from-blue-500 to-cyan-500", title: "Secure Transactions", description: "All payments are processed through trusted platforms with buyer protection." },
-  { icon: "verified", iconGradient: "bg-gradient-to-br from-purple-500 to-pink-500", title: "Quality Verified", description: "Every item is thoroughly inspected and verified before listing." },
-  { icon: "local_shipping", iconGradient: "bg-gradient-to-br from-orange-500 to-red-500", title: "Fast Shipping", description: "Items ship within 24 hours with tracking provided for all orders." },
-  { icon: "support_agent", iconGradient: "bg-gradient-to-br from-green-500 to-teal-500", title: "Friendly Support", description: "Direct communication with the seller for any questions or concerns." },
-];
+
 
 const products = [
   { image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDLK7m-BCFzm1eDND9jqA0SNNPEwgvAB9awC6dpyW5tOZGsIua1i55o7RlYSuK3me1_NSOlHRrl85K6q75hmI5JOudX-Qu8YU0tZhvmjLQsd_q2cvZmE0WqtyManZSFINl8aabEsUY_wNDmuyZPcI8lBpSP4f1PlpVxA9aeAVAZCOKMu7olorwoPHyvCNJtwMlaXQKsh7L_Lm3OGwC-Tzw5THxgCdu_m6ixmVzylafX7H3PyEIyugFhA-BDczSN47IUm6ScJRZj1oc", title: "Retro Console X", price: "$150", description: "Vintage gaming system with original controllers and 5 game cartridges. Fully restored circuitry.", badge: { icon: "star", iconColor: "text-[#01baef]", text: "MINT" } },
@@ -79,30 +73,23 @@ export default function Home() {
           {/* Liquid Cards */}
           <section className="-mt-8 flex justify-between items-start gap-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
             {liquidCards.map((card, i) => (
-              <LiquidCard key={i} title={card.title} description={card.description} />
+              <LiquidCard
+                key={i}
+                title={card.title}
+                description={card.description}
+                enableScrollOpacity={i === 2}
+                previewImage={i === 2 ? `${basePath}/images/paper1.jpg` : undefined}
+              />
             ))}
           </section>
 
-          {/* Sticky Feature Cards */}
-          <div className="features-sticky-container relative">
-            {featureCards.map((card, i) => (
-              <FeatureCard key={i} {...card} index={i} />
-            ))}
-          </div>
+
         </div>
       </section>
 
       {/* Inventory Section */}
       <section className="pt-28 pb-12 relative" id="inventory">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="mb-8 flex justify-center">
-            <div className="w-full max-w-4xl rounded-3xl overflow-hidden shadow-lg border border-slate-200">
-              <video className="w-full" autoPlay loop muted playsInline disablePictureInPicture>
-                <source src={`${basePath}/videos/cards-video.mov`} type="video/quicktime" />
-                <source src={`${basePath}/videos/cards-video.mov`} type="video/mp4" />
-              </video>
-            </div>
-          </div>
 
           <div className="mt-8 mb-8 flex justify-end">
             <div className="w-full max-w-2xl overflow-hidden shadow-lg">

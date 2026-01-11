@@ -132,7 +132,7 @@ export function useGSAPAnimations() {
                     trigger: ".upenn-image-wrapper",
                     start: "top bottom",
                     end: "bottom top",
-                    scrub: 1,
+                    scrub: 0.1,
                 },
                 y: "25%",
                 ease: "none",
