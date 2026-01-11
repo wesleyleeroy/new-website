@@ -38,7 +38,7 @@ export default function FeaturesParticleCanvas() {
                 this.vel = { x: 0, y: 0 };
                 this.acc = { x: 0, y: 0 };
                 this.maxSpeed = Math.random() * 6 + 4;
-                this.size = 2;
+                this.size = 1.5;
                 this.color = { r: 31, g: 72, b: 126 };
                 this.isKilled = false;
             }
@@ -90,20 +90,20 @@ export default function FeaturesParticleCanvas() {
             if (!tCtx) return;
 
             const fontSize = Math.min(canvas.width * 0.15, 80);
-            tCtx.font = `bold ${fontSize}px 'Outfit', sans-serif`;
+            tCtx.font = `800 ${fontSize}px 'Outfit', sans-serif`;
             tCtx.textAlign = "left";
             tCtx.textBaseline = "middle";
             tCtx.fillStyle = "white";
             tCtx.fillText(word, canvas.width * 0.1, canvas.height / 2);
 
             const imageData = tCtx.getImageData(0, 0, canvas.width, canvas.height).data;
-            const pixelStep = 2;
+            const pixelStep = 1; // Reduced from 2 for more particles
             const newTargets: { x: number; y: number }[] = [];
 
             for (let y = 0; y < canvas.height; y += pixelStep) {
                 for (let x = 0; x < canvas.width; x += pixelStep) {
                     const index = (y * canvas.width + x) * 4;
-                    if (imageData[index + 3] > 128) newTargets.push({ x, y });
+                    if (imageData[index + 3] > 50) newTargets.push({ x, y });
                 }
             }
 
@@ -138,14 +138,18 @@ export default function FeaturesParticleCanvas() {
             requestAnimationFrame(animate);
         }
 
+
         let hasStarted = false;
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting && !hasStarted) {
                     hasStarted = true;
-                    resize();
-                    nextWord();
-                    animate();
+                    // Wait for Outfit font to load before rendering
+                    document.fonts.ready.then(() => {
+                        resize();
+                        nextWord();
+                        animate();
+                    });
                     observer.disconnect();
                 }
             });

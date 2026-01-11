@@ -1,9 +1,31 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 
 export default function Navigation() {
     const buttonRef = useRef<HTMLAnchorElement>(null);
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // Show navbar when scrolling up, hide when scrolling down
+            if (currentScrollY < lastScrollY) {
+                // Scrolling up
+                setIsVisible(true);
+            } else if (currentScrollY > lastScrollY && currentScrollY > 80) {
+                // Scrolling down and past the initial navbar height
+                setIsVisible(false);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
 
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
         const button = buttonRef.current;
@@ -27,7 +49,10 @@ export default function Navigation() {
     }, []);
 
     return (
-        <nav className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/60">
+        <nav
+            className={`fixed top-0 z-50 w-full bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 transition-transform duration-300 ease-in-out ${isVisible ? "translate-y-0" : "-translate-y-full"
+                }`}
+        >
             <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-20 items-center justify-between overflow-visible">
                     <div className="flex items-baseline gap-2 py-2">
