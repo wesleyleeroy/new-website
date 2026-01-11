@@ -23,8 +23,19 @@ export default function Navigation() {
             setLastScrollY(currentScrollY);
         };
 
+        // Listen for custom event to force hide nav
+        const handleForceHide = () => {
+            setIsVisible(false);
+            setLastScrollY(window.scrollY);
+        };
+
         window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("hideNavigation", handleForceHide);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("hideNavigation", handleForceHide);
+        };
     }, [lastScrollY]);
 
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -48,6 +59,15 @@ export default function Navigation() {
         button.style.setProperty("--shine-y", "-100px");
     }, []);
 
+    const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        const target = document.querySelector("#dock");
+        if (target) {
+            window.dispatchEvent(new CustomEvent('hideNavigation'));
+            target.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <nav
             className={`fixed top-0 z-50 w-full bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 transition-transform duration-300 ease-in-out ${isVisible ? "translate-y-0" : "-translate-y-full"
@@ -65,7 +85,7 @@ export default function Navigation() {
                     </div>
                     <div className="hidden md:flex items-center gap-8">
                         <a className="text-lg font-bold text-[#1f487e] hover:text-[#01baef] transition-colors" href="#inventory">Browse Items</a>
-                        <a className="text-lg font-bold text-[#1f487e] hover:text-[#01baef] transition-colors" href="#contact">Contact</a>
+                        <a className="text-lg font-bold text-[#1f487e] hover:text-[#01baef] transition-colors" href="#dock" onClick={handleContactClick}>Contact</a>
                     </div>
                     <div className="glow-btn-wrapper hidden md:inline-flex">
                         <span className="btn-border-base"></span>
@@ -74,11 +94,12 @@ export default function Navigation() {
                             ref={buttonRef}
                             id="nav-btn"
                             className="shine-button flex h-10 items-center justify-center rounded-md bg-transparent border-2 border-black px-6 text-sm font-bold text-black transition-all hover:bg-black hover:text-white"
-                            href="#contact"
+                            href="#dock"
+                            onClick={handleContactClick}
                             onMouseMove={handleMouseMove}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <span className="relative z-10">Contact Me</span>
+                            <span className="relative z-10">My Socials</span>
                         </a>
                     </div>
                     <div className="md:hidden">

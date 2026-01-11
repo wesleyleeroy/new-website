@@ -69,22 +69,21 @@ export default function Home() {
           </div>
 
           <FeaturesParticleCanvas />
-
-          {/* Liquid Cards */}
-          <section className="-mt-8 flex justify-between items-start gap-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            {liquidCards.map((card, i) => (
-              <LiquidCard
-                key={i}
-                title={card.title}
-                description={card.description}
-                enableScrollOpacity={i === 2}
-                previewImage={i === 2 ? `${basePath}/images/paper1.jpg` : undefined}
-              />
-            ))}
-          </section>
-
-
         </div>
+
+        {/* Liquid Cards - Full Width */}
+        <section className="-mt-8 flex justify-between items-start gap-6 px-4 w-full">
+          {liquidCards.map((card, i) => (
+            <LiquidCard
+              key={i}
+              title={card.title}
+              description={card.description}
+              enableScrollOpacity={i === 2}
+              previewImage={i === 2 ? `${basePath}/images/paper1.jpg` : undefined}
+              position={i === 0 ? 'left' : i === 2 ? 'right' : 'center'}
+            />
+          ))}
+        </section>
       </section>
 
       {/* Inventory Section */}
@@ -131,7 +130,9 @@ export default function Home() {
       <ContactSection />
       <LiquidButton />
       <Marquee />
-      <DockDemo />
+      <div id="dock">
+        <DockDemo />
+      </div>
       <RenaissanceReveal />
       <Footer />
     </>

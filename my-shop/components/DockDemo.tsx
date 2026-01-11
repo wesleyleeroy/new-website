@@ -152,6 +152,15 @@ export default function DockDemo() {
                                 aria-label={social.name}
                                 className="flex items-center justify-center w-full h-full rounded-full hover:bg-gray-100 transition-colors text-gray-700"
                                 title={name}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    // Force hide the navigation bar
+                                    window.dispatchEvent(new CustomEvent('hideNavigation'));
+                                    const target = document.querySelector(social.url);
+                                    if (target) {
+                                        target.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }}
                             >
                                 <social.icon className="w-5 h-5" />
                             </a>

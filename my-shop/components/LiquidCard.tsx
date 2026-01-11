@@ -7,9 +7,10 @@ interface LiquidCardProps {
     description: string;
     enableScrollOpacity?: boolean;
     previewImage?: string;
+    position?: 'left' | 'center' | 'right';
 }
 
-export default function LiquidCard({ title, description, enableScrollOpacity = false, previewImage }: LiquidCardProps) {
+export default function LiquidCard({ title, description, enableScrollOpacity = false, previewImage, position = 'center' }: LiquidCardProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
     const spotlightRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,9 @@ export default function LiquidCard({ title, description, enableScrollOpacity = f
 
     // Scroll-based opacity state
     const [opacity, setOpacity] = useState(0.9);
+    const [isHovered, setIsHovered] = useState(false);
+
+    // ... (useEffect hook content will be updated in next step) ...
 
     useEffect(() => {
         const container = containerRef.current;
@@ -25,39 +29,53 @@ export default function LiquidCard({ title, description, enableScrollOpacity = f
         const shimmer = shimmerRef.current;
         if (!container || !card || !spotlight || !shimmer) return;
 
+        const handleMouseEnter = () => setIsHovered(true);
+
         const handleMouseMove = (e: MouseEvent) => {
             const rect = container.getBoundingClientRect();
             const dx = e.clientX - rect.left - rect.width / 2;
             const dy = e.clientY - rect.top - rect.height / 2;
             const rotateY = (dx / rect.width) * 20;
             const rotateX = (dy / rect.height) * -20;
-            card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+
+            let translateX = 0;
+            if (position === 'left') translateX = 15;
+            if (position === 'right') translateX = -15;
+
+            card.style.transform = `scale(1.25) translateX(${translateX}%) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+            // Apply z-index to container so it pops over siblings
+            if (container) container.style.zIndex = '100';
         };
 
         const handleMouseLeave = () => {
-            card.style.transform = "rotateY(0) rotateX(0)";
+            setIsHovered(false);
+            card.style.transform = "scale(1) translateX(0) rotateY(0) rotateX(0)";
+            if (container) container.style.zIndex = 'auto'; // Reset container z-index
         };
 
         const handleCardMouseMove = (e: MouseEvent) => {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            // Adjust for scale(1.25)
+            const x = (e.clientX - rect.left) / 1.25;
+            const y = (e.clientY - rect.top) / 1.25;
             spotlight.style.setProperty("--mouse-x", `${x}px`);
             spotlight.style.setProperty("--mouse-y", `${y}px`);
             shimmer.style.setProperty("--mouse-x", `${x}px`);
             shimmer.style.setProperty("--mouse-y", `${y}px`);
         };
 
+        container.addEventListener("mouseenter", handleMouseEnter);
         container.addEventListener("mousemove", handleMouseMove);
         container.addEventListener("mouseleave", handleMouseLeave);
         card.addEventListener("mousemove", handleCardMouseMove);
 
         return () => {
+            container.removeEventListener("mouseenter", handleMouseEnter);
             container.removeEventListener("mousemove", handleMouseMove);
             container.removeEventListener("mouseleave", handleMouseLeave);
             card.removeEventListener("mousemove", handleCardMouseMove);
         };
-    }, []);
+    }, [position]); // Added position dependency
 
     // Scroll-based opacity effect
     useEffect(() => {
@@ -86,35 +104,40 @@ export default function LiquidCard({ title, description, enableScrollOpacity = f
     }, [enableScrollOpacity]);
 
     // Dynamic background style for scroll opacity
+    const currentOpacity = isHovered ? 1 : opacity;
     const cardStyle = enableScrollOpacity
         ? {
-            background: `linear-gradient(135deg, rgba(26, 26, 46, ${opacity}) 0%, rgba(22, 33, 62, ${opacity}) 50%, rgba(15, 15, 35, ${opacity}) 100%)`,
+            background: `linear-gradient(135deg, rgba(26, 26, 46, ${currentOpacity}) 0%, rgba(22, 33, 62, ${currentOpacity}) 50%, rgba(15, 15, 35, ${currentOpacity}) 100%)`,
         }
         : undefined;
+
 
     return (
         <div ref={containerRef} className="liquid-card-container" role="region" aria-label={title} tabIndex={0}>
             <div ref={cardRef} className="liquid-card" style={cardStyle}>
-                <div ref={spotlightRef} className="liquid-spotlight"></div>
-                <div ref={shimmerRef} className="liquid-shimmer"></div>
-                <div className="liquid-card-content">
-                    <div>
-                        <h2 className="liquid-card-title">{title}</h2>
-                        <p className="liquid-card-description">{description}</p>
-                        {previewImage && (
-                            <div className="mt-4 rounded-lg overflow-hidden max-h-[350px] overflow-y-auto">
-                                <img
-                                    src={previewImage}
-                                    alt={`${title} preview`}
-                                    className="w-full h-auto object-cover rounded-lg transition-opacity"
-                                    style={{
-                                        filter: 'invert(1) hue-rotate(180deg)',
-                                        opacity: 0.85,
-                                    }}
-                                />
+                <div className="liquid-card-clipper absolute inset-0 rounded-[24px] overflow-hidden z-10 bg-inherit">
+                    {/* Full-panel preview image */}
+                    {previewImage && (
+                        <img
+                            src={previewImage}
+                            alt={`${title} preview`}
+                            className="absolute inset-0 w-full h-full object-cover object-top"
+                            style={{
+                                filter: 'invert(1) hue-rotate(180deg)',
+                                opacity: 0.85,
+                            }}
+                        />
+                    )}
+                    <div ref={spotlightRef} className="liquid-spotlight"></div>
+                    <div ref={shimmerRef} className="liquid-shimmer"></div>
+                    {!previewImage && (
+                        <div className="liquid-card-content">
+                            <div>
+                                <h2 className="liquid-card-title">{title}</h2>
+                                <p className="liquid-card-description">{description}</p>
                             </div>
-                        )}
-                    </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
