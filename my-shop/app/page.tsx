@@ -14,6 +14,8 @@ import Footer from "@/components/Footer";
 import RenaissanceReveal from "@/components/RenaissanceReveal";
 import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 const featureCards = [
   { icon: "shield_check", iconGradient: "bg-gradient-to-br from-blue-500 to-cyan-500", title: "Secure Transactions", description: "All payments are processed through trusted platforms with buyer protection." },
   { icon: "verified", iconGradient: "bg-gradient-to-br from-purple-500 to-pink-500", title: "Quality Verified", description: "Every item is thoroughly inspected and verified before listing." },
@@ -43,7 +45,7 @@ export default function Home() {
     <>
       {/* Background Video */}
       <video className="fixed-bg-video" autoPlay loop muted playsInline preload="auto">
-        <source src="/videos/background final final.mp4" type="video/mp4" />
+        <source src={`${basePath}/videos/background final final.mp4`} type="video/mp4" />
       </video>
 
       {/* Frosted Glass Overlay */}
@@ -96,8 +98,8 @@ export default function Home() {
           <div className="mb-8 flex justify-center">
             <div className="w-full max-w-4xl rounded-3xl overflow-hidden shadow-lg border border-slate-200">
               <video className="w-full" autoPlay loop muted playsInline disablePictureInPicture>
-                <source src="/videos/cards-video.mov" type="video/quicktime" />
-                <source src="/videos/cards-video.mov" type="video/mp4" />
+                <source src={`${basePath}/videos/cards-video.mov`} type="video/quicktime" />
+                <source src={`${basePath}/videos/cards-video.mov`} type="video/mp4" />
               </video>
             </div>
           </div>
@@ -105,7 +107,7 @@ export default function Home() {
           <div className="mt-8 mb-8 flex justify-end">
             <div className="w-full max-w-2xl overflow-hidden shadow-lg">
               <div className="upenn-image-wrapper overflow-hidden relative" style={{ height: "550px" }}>
-                <img id="upenn-image" src="/images/upenn.jpg" alt="UPenn" className="absolute left-0 w-full object-cover" style={{ height: "160%", top: "-20%", willChange: "transform" }} />
+                <img id="upenn-image" src={`${basePath}/images/upenn.jpg`} alt="UPenn" className="absolute left-0 w-full object-cover" style={{ height: "160%", top: "-20%", willChange: "transform" }} />
               </div>
             </div>
           </div>

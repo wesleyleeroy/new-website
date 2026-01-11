@@ -6,6 +6,8 @@ import { CalendarIcon, HomeIcon, MailIcon, PencilIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Dock, DockIcon } from "@/components/magicui/dock"
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export type IconProps = React.HTMLAttributes<SVGElement>
 
 const Icons = {
@@ -64,7 +66,7 @@ const Icons = {
     ),
     researchgate: (props: IconProps) => (
         <img
-            src="/images/research gate logo.png"
+            src={`${basePath}/images/research gate logo.png`}
             alt="ResearchGate"
             className={props.className}
             style={{ width: '28px', height: '28px', objectFit: 'contain' }}
