@@ -89,7 +89,7 @@ export default function FeaturesParticleCanvas() {
             const tCtx = tempCanvas.getContext("2d");
             if (!tCtx) return;
 
-            const fontSize = Math.min(canvas.width * 0.15, 80);
+            const fontSize = Math.min(canvas.width * 0.12, 60);
             tCtx.font = `800 ${fontSize}px 'Outfit', sans-serif`;
             tCtx.textAlign = "left";
             tCtx.textBaseline = "middle";

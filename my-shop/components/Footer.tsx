@@ -1,20 +1,8 @@
 "use client";
 
-import Script from "next/script";
-
 export default function Footer() {
     return (
-        <footer className="relative py-12 overflow-hidden bg-transparent min-h-[500px] flex items-end">
-            <div className="absolute inset-0 z-0 w-full h-full pointer-events-none opacity-100">
-                <Script
-                    src="https://unpkg.com/@splinetool/viewer@1.12.32/build/spline-viewer.js"
-                    type="module"
-                    strategy="lazyOnload"
-                />
-                {/* @ts-expect-error - spline-viewer is a custom element */}
-                <spline-viewer url="https://prod.spline.design/z34inNeVYZu0UM7q/scene.splinecode"></spline-viewer>
-            </div>
-
+        <footer className="relative py-12 overflow-hidden bg-white/80 backdrop-blur-sm">
             <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
                 <div className="text-center md:text-left">
                     <p className="text-[#1f487e] font-bold text-lg mb-1">Wesley Leeroy</p>
@@ -44,3 +32,4 @@ export default function Footer() {
         </footer>
     );
 }
+
