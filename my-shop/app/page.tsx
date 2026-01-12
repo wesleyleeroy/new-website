@@ -78,9 +78,12 @@ export default function Home() {
               key={i}
               title={card.title}
               description={card.description}
-              enableScrollOpacity={i === 2}
-              previewImage={i === 2 ? `${basePath}/images/paper1.jpg` : undefined}
+              enableScrollOpacity={i === 0 || i === 2}
+              previewImage={i === 0 ? `${basePath}/images/paper3.png` : i === 1 ? `${basePath}/images/paper2.jpg` : i === 2 ? `${basePath}/images/paper1.jpg` : undefined}
+              previewFit={i === 1 ? 'contain' : 'cover'}
+              previewOffsetY={i === 0 ? '20%' : '0%'}
               position={i === 0 ? 'left' : i === 2 ? 'right' : 'center'}
+              link={i === 0 ? 'https://publications.aaahq.org/jeta/article-abstract/21/1/89/11896/Impact-of-Blockchain-on-Improving-Taxpayers?redirectedFrom=fulltext' : i === 1 ? 'https://www.eba-net.org/wp-content/uploads/2024/05/7-Lee-Leeroy25-66.pdf' : i === 2 ? 'https://www.mdpi.com/1911-8074/18/10/542' : undefined}
             />
           ))}
         </section>

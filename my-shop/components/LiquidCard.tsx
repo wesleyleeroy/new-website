@@ -7,10 +7,13 @@ interface LiquidCardProps {
     description: string;
     enableScrollOpacity?: boolean;
     previewImage?: string;
+    previewFit?: 'cover' | 'contain';
+    previewOffsetY?: string;
     position?: 'left' | 'center' | 'right';
+    link?: string;
 }
 
-export default function LiquidCard({ title, description, enableScrollOpacity = false, previewImage, position = 'center' }: LiquidCardProps) {
+export default function LiquidCard({ title, description, enableScrollOpacity = false, previewImage, previewFit = 'cover', previewOffsetY = '0%', position = 'center', link }: LiquidCardProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
     const spotlightRef = useRef<HTMLDivElement>(null);
@@ -111,20 +114,26 @@ export default function LiquidCard({ title, description, enableScrollOpacity = f
         }
         : undefined;
 
+    const handleClick = () => {
+        if (link) {
+            window.open(link, '_blank', 'noopener,noreferrer');
+        }
+    };
 
     return (
-        <div ref={containerRef} className="liquid-card-container" role="region" aria-label={title} tabIndex={0}>
+        <div ref={containerRef} className="liquid-card-container" role="region" aria-label={title} tabIndex={0} onClick={handleClick} style={{ cursor: link ? 'pointer' : 'default' }}>
             <div ref={cardRef} className="liquid-card" style={cardStyle}>
-                <div className="liquid-card-clipper absolute inset-0 rounded-[24px] overflow-hidden z-10 bg-inherit">
-                    {/* Full-panel preview image */}
+                <div className="liquid-card-clipper absolute inset-0 rounded-none overflow-hidden z-10" style={{ backgroundColor: '#000000' }}>
                     {previewImage && (
                         <img
                             src={previewImage}
                             alt={`${title} preview`}
-                            className="absolute inset-0 w-full h-full object-cover object-top"
+                            className={`absolute inset-0 w-full h-full object-cover`}
                             style={{
                                 filter: 'invert(1) hue-rotate(180deg)',
                                 opacity: 0.85,
+                                transform: previewFit === 'contain' ? `scale(1.3) translateY(10%)` : 'none',
+                                objectPosition: previewOffsetY !== '0%' ? `center ${previewOffsetY}` : 'center top',
                             }}
                         />
                     )}

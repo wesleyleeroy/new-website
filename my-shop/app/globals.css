@@ -396,6 +396,7 @@ body {
   cursor: pointer;
   flex: 1;
   max-width: 420px;
+  transform-style: preserve-3d;
 }
 
 .liquid-card {
@@ -403,9 +404,9 @@ body {
   width: 100%;
   height: 450px;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-  border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  /* Added border to match buttons and hide edge artifacts */
+  border-radius: 0;
+  border: 2px solid rgba(93, 89, 232, 0.7);
+  /* Blue border to match shadow glow */
   /* overflow: hidden is handled by inner wrapper */
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
   will-change: transform;
@@ -499,7 +500,7 @@ body {
   content: '';
   position: absolute;
   inset: -1px;
-  border-radius: 24px;
+  border-radius: 0;
   background: linear-gradient(135deg,
       rgba(30, 64, 175, 0.6) 0%,
       rgba(37, 99, 235, 0.4) 50%,
