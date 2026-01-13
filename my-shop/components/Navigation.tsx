@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Liquid, Colors } from "@/components/LiquidButton";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 const defaultColors: Colors = {
     color1: '#0B06FC',
     color2: '#7D7BF4',
@@ -139,7 +141,7 @@ export default function Navigation() {
                             <span className="btn-glow"></span>
                             <motion.a
                                 id="personal-btn"
-                                href={isPersonalPage ? "/" : "/personal"}
+                                href={isPersonalPage ? `${basePath}/` : `${basePath}/personal`}
                                 className="relative w-[140px] h-[40px] rounded-2xl overflow-hidden cursor-pointer border-2 border-black"
                                 initial={{
                                     boxShadow: "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)"
