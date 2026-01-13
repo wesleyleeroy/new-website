@@ -71,7 +71,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
         ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "30vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
     const dy6 = useTransform(scrollYProgress, TIME_POINTS, ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]);
     const dx3 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "30vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "50vw", "0vw"]);
     const dy3 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vh", "0vh", "0vh", "30vh", "0vh", "0vh", "0vh", "-20vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]); // Phase 4 Up
 
@@ -85,7 +85,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 
     // Phase 7 Custom (0.92 Peak): Index 0 Right, Index 1 Right+Up
     const dx0 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "-30vw", "0vw", "-20vw", "0vw", "0vw", "0vw", "30vw", "0vw", "30vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "-30vw", "0vw", "-20vw", "0vw", "0vw", "0vw", "30vw", "0vw", "50vw", "0vw"]);
     const dy0 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vh", "0vh", "0vh", "30vh", "0vh", "0vh", "0vh", "-20vh", "0vh", "-30vh", "0vh", "-30vh", "0vh", "0vh", "0vh"]); // Phase 2 Down
 
@@ -93,6 +93,11 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
         ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "30vw", "0vw"]);
     const dy1 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vh", "0vh", "0vh", "0vh", "0vh", "-30vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "-20vh", "0vh"]);
+
+    const dx5 = useTransform(scrollYProgress, TIME_POINTS,
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "-30vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
+    const dy5 = useTransform(scrollYProgress, TIME_POINTS,
+        ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]);
 
     return (
         <div ref={container} className="relative h-[1750vh]">
@@ -106,6 +111,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                         const isIndex4 = index === 4;
                         const isIndex0 = index === 0;
                         const isIndex1 = index === 1;
+                        const isIndex5 = index === 5;
 
                         // Conditional Transforms
                         let xTransform: any = 0;
@@ -113,16 +119,11 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 
                         if (isIndex6) { xTransform = dx6; yTransform = dy6; }
                         else if (isIndex3) { xTransform = dx3; yTransform = dy3; }
-                        else if (isIndex2) { yTransform = dy2; } // Index 2 uses dy2 in Phase 6. Does it need reset for Phase 7?
-                        // Wait. dy2 curve: [0... -30vh, 0, 0, 0].
-                        // At P7 (0.92), it is 0.
-                        // So Index 2 returns to base position before zooming in?
-                        // Yes. Phase 6 ends at 0.85 (rest). Phase 7 starts.
-                        // However, Index 2 IS the target of Phase 7.
-                        // It should be 0 offset. Correct.
+                        else if (isIndex2) { yTransform = dy2; }
                         else if (isIndex4) { xTransform = dx4; yTransform = dy4; }
                         else if (isIndex0) { xTransform = dx0; yTransform = dy0; }
                         else if (isIndex1) { xTransform = dx1; yTransform = dy1; }
+                        else if (isIndex5) { xTransform = dx5; yTransform = dy5; }
 
                         return (
                             <motion.div

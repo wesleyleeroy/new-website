@@ -29,14 +29,14 @@ export default function ContactSection() {
     return (
         <section className="py-20 relative" id="contact">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                <div className="relative overflow-hidden rounded-[3rem] bg-white border border-slate-100 p-8 md:p-12 text-center soft-shadow">
+                <div className="relative overflow-hidden rounded-[3rem] bg-white border border-slate-100 p-8 md:p-12 text-center soft-shadow contact-card">
                     <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#01baef]/5 to-transparent pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col items-center">
-                        <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#01baef]/10 text-[#01baef]">
+                        <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#01baef]/10 text-[#01baef] contact-content">
                             <span className="material-symbols-outlined text-3xl">mail</span>
                         </div>
-                        <h2 className="text-3xl font-bold text-[#1f487e] mb-10">Reach me here!</h2>
-                        <div className="w-full max-w-lg mb-10">
+                        <h2 className="text-3xl font-bold text-[#1f487e] mb-10 contact-content">Reach me here!</h2>
+                        <div className="w-full max-w-lg mb-10 contact-content">
                             <div
                                 ref={emailBtnRef}
                                 onClick={handleCopy}

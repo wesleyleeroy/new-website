@@ -7,6 +7,7 @@ import LiquidCard from "@/components/LiquidCard";
 import ContactSection from "@/components/ContactSection";
 import Marquee from "@/components/Marquee";
 import DockDemo from "@/components/DockDemo";
+import CurvedImageScroll from "@/components/CurvedImageScroll";
 import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
@@ -74,6 +75,8 @@ export default function Home() {
           ))}
         </section>
       </section>
+
+      <CurvedImageScroll />
 
       {/* UPenn Image Section */}
       <section className="pt-28 pb-12 relative" id="about">

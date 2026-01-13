@@ -93,24 +93,56 @@ export function useGSAPAnimations() {
         });
 
         // Feature titles
-        gsap.set(".feature-title", { y: 100, opacity: 0, scale: 0.95 });
-        gsap.to(".feature-title", {
-            scrollTrigger: { trigger: ".feature-title", start: "top 95%", toggleActions: "play none none none" },
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 2,
-            ease: elementisEase,
+        const featureTitles = gsap.utils.toArray<HTMLElement>(".feature-title");
+        featureTitles.forEach((title) => {
+            gsap.set(title, { y: 100, opacity: 0, scale: 0.95 });
+            gsap.to(title, {
+                scrollTrigger: { trigger: title, start: "top 95%", toggleActions: "play none none none" },
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 2,
+                ease: elementisEase,
+            });
         });
 
-        gsap.set(".feature-subtitle", { y: 80, opacity: 0 });
-        gsap.to(".feature-subtitle", {
-            scrollTrigger: { trigger: ".feature-subtitle", start: "top 95%", toggleActions: "play none none none" },
-            y: 0,
-            opacity: 1,
-            duration: 2,
-            delay: 0.3,
-            ease: elementisEase,
+        const featureSubtitles = gsap.utils.toArray<HTMLElement>(".feature-subtitle");
+        featureSubtitles.forEach((subtitle) => {
+            gsap.set(subtitle, { y: 80, opacity: 0 });
+            gsap.to(subtitle, {
+                scrollTrigger: { trigger: subtitle, start: "top 95%", toggleActions: "play none none none" },
+                y: 0,
+                opacity: 1,
+                duration: 2,
+                delay: 0.3,
+                ease: elementisEase,
+            });
+        });
+
+        // Contact Section Animations
+        const contactCards = gsap.utils.toArray<HTMLElement>(".contact-card");
+        contactCards.forEach((card) => {
+            gsap.set(card, { y: 100, opacity: 0 });
+            gsap.to(card, {
+                scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" },
+                y: 0,
+                opacity: 1,
+                duration: 2.5,
+                ease: elementisEase,
+            });
+        });
+
+        const contactContents = gsap.utils.toArray<HTMLElement>(".contact-content");
+        contactContents.forEach((content) => {
+            gsap.set(content, { y: 50, opacity: 0 });
+            gsap.to(content, {
+                scrollTrigger: { trigger: content, start: "top 95%", toggleActions: "play none none none" },
+                y: 0,
+                opacity: 1,
+                duration: 2.5,
+                delay: 0.1, // Reduced from 0.2
+                ease: elementisEase,
+            });
         });
 
         // Liquid cards
