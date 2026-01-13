@@ -2,6 +2,7 @@
 
 import { useRef, useCallback, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Liquid, Colors } from "@/components/LiquidButton";
 
@@ -139,31 +140,32 @@ export default function Navigation() {
                         >
                             <span className="btn-border-base"></span>
                             <span className="btn-glow"></span>
-                            <motion.a
-                                id="personal-btn"
-                                href={isPersonalPage ? `${basePath}/` : `${basePath}/personal`}
-                                className="relative w-[140px] h-[40px] rounded-2xl overflow-hidden cursor-pointer border-2 border-black"
-                                initial={{
-                                    boxShadow: "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)"
-                                }}
-                                animate={{
-                                    boxShadow: isHoveredPersonal
-                                        ? "0 18px 50px -5px rgba(0, 0, 0, 0.6), 0 25px 60px -10px rgba(11, 6, 252, 0.8), 0 15px 40px -5px rgba(125, 123, 244, 0.6), 0 0 70px -10px rgba(93, 89, 232, 0.5)"
-                                        : "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)",
-                                }}
-                                transition={{ duration: 0.3, ease: "easeOut" }}
-                            >
-                                {/* Background */}
-                                <div className="absolute inset-0 bg-black rounded-2xl" />
+                            <Link href={isPersonalPage ? "/" : "/personal"} legacyBehavior passHref>
+                                <motion.a
+                                    id="personal-btn"
+                                    className="relative w-[140px] h-[40px] rounded-2xl overflow-hidden cursor-pointer border-2 border-black"
+                                    initial={{
+                                        boxShadow: "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)"
+                                    }}
+                                    animate={{
+                                        boxShadow: isHoveredPersonal
+                                            ? "0 18px 50px -5px rgba(0, 0, 0, 0.6), 0 25px 60px -10px rgba(11, 6, 252, 0.8), 0 15px 40px -5px rgba(125, 123, 244, 0.6), 0 0 70px -10px rgba(93, 89, 232, 0.5)"
+                                            : "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)",
+                                    }}
+                                    transition={{ duration: 0.3, ease: "easeOut" }}
+                                >
+                                    {/* Background */}
+                                    <div className="absolute inset-0 bg-black rounded-2xl" />
 
-                                {/* Liquid layers */}
-                                <Liquid isHovered={isHoveredPersonal} colors={defaultColors} />
+                                    {/* Liquid layers */}
+                                    <Liquid isHovered={isHoveredPersonal} colors={defaultColors} />
 
-                                {/* Content */}
-                                <div className="absolute inset-0 flex items-center justify-center gap-2 z-10">
-                                    <span className="text-white text-sm font-bold">{isPersonalPage ? "Home" : "Personal Life"}</span>
-                                </div>
-                            </motion.a>
+                                    {/* Content */}
+                                    <div className="absolute inset-0 flex items-center justify-center gap-2 z-10">
+                                        <span className="text-white text-sm font-bold">{isPersonalPage ? "Home" : "Personal Life"}</span>
+                                    </div>
+                                </motion.a>
+                            </Link>
                         </motion.div>
                         <div className="glow-btn-wrapper inline-flex">
                             <span className="btn-border-base"></span>
@@ -227,6 +229,6 @@ export default function Navigation() {
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 }
