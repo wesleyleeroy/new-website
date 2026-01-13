@@ -166,7 +166,7 @@ export default function FeaturesParticleCanvas() {
     }, []);
 
     return (
-        <div className="relative h-64 mb-16 overflow-hidden -mx-4 sm:-mx-6 lg:-mx-8" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)" }}>
+        <div className="relative h-32 mb-8 overflow-hidden -mx-4 sm:-mx-6 lg:-mx-8" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)" }}>
             <canvas ref={canvasRef} className="w-full h-full" />
         </div>
     );

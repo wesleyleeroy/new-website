@@ -93,19 +93,21 @@ export function useGSAPAnimations() {
         });
 
         // Feature titles
-        gsap.from(".feature-title", {
+        gsap.set(".feature-title", { y: 100, opacity: 0, scale: 0.95 });
+        gsap.to(".feature-title", {
             scrollTrigger: { trigger: ".feature-title", start: "top 95%", toggleActions: "play none none none" },
-            y: 100,
-            opacity: 0,
-            scale: 0.95,
+            y: 0,
+            opacity: 1,
+            scale: 1,
             duration: 2,
             ease: elementisEase,
         });
 
-        gsap.from(".feature-subtitle", {
+        gsap.set(".feature-subtitle", { y: 80, opacity: 0 });
+        gsap.to(".feature-subtitle", {
             scrollTrigger: { trigger: ".feature-subtitle", start: "top 95%", toggleActions: "play none none none" },
-            y: 80,
-            opacity: 0,
+            y: 0,
+            opacity: 1,
             duration: 2,
             delay: 0.3,
             ease: elementisEase,

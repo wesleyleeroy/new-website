@@ -68,25 +68,31 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 
     // Phase 5 Custom (0.64 Peak): Index 6 Right, Index 3 Right
     const dx6 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "30vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
     const dy6 = useTransform(scrollYProgress, TIME_POINTS, ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]);
     const dx3 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "30vw", "0vw"]);
+    const dy3 = useTransform(scrollYProgress, TIME_POINTS,
+        ["0vh", "0vh", "0vh", "30vh", "0vh", "0vh", "0vh", "-20vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]); // Phase 4 Up
 
     // Phase 6 Custom (0.78 Peak): Index 2 Up, Index 4 Right
     const dy2 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "-30vh", "0vh", "0vh", "0vh"]);
     const dx4 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "30vw", "0vw", "0vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "-20vw", "0vw", "-20vw", "0vw", "0vw", "0vw", "30vw", "0vw", "0vw", "0vw"]);
+    const dy4 = useTransform(scrollYProgress, TIME_POINTS,
+        ["0vh", "0vh", "0vh", "0vh", "0vh", "30vh", "0vh", "20vh", "0vh", "0vh", "0vh", "0vh", "0vh", "30vh", "0vh"]); // Phase 7 Down
 
     // Phase 7 Custom (0.92 Peak): Index 0 Right, Index 1 Right+Up
     const dx0 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "30vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "-30vw", "0vw", "-20vw", "0vw", "0vw", "0vw", "30vw", "0vw", "30vw", "0vw"]);
+    const dy0 = useTransform(scrollYProgress, TIME_POINTS,
+        ["0vh", "0vh", "0vh", "30vh", "0vh", "0vh", "0vh", "-20vh", "0vh", "-30vh", "0vh", "-30vh", "0vh", "0vh", "0vh"]); // Phase 2 Down
 
     const dx1 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "30vw", "0vw"]);
     const dy1 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "-20vh", "0vh"]);
+        ["0vh", "0vh", "0vh", "0vh", "0vh", "-30vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "-20vh", "0vh"]);
 
     return (
         <div ref={container} className="relative h-[1750vh]">
@@ -106,7 +112,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                         let yTransform: any = 0;
 
                         if (isIndex6) { xTransform = dx6; yTransform = dy6; }
-                        else if (isIndex3) { xTransform = dx3; }
+                        else if (isIndex3) { xTransform = dx3; yTransform = dy3; }
                         else if (isIndex2) { yTransform = dy2; } // Index 2 uses dy2 in Phase 6. Does it need reset for Phase 7?
                         // Wait. dy2 curve: [0... -30vh, 0, 0, 0].
                         // At P7 (0.92), it is 0.
@@ -114,8 +120,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                         // Yes. Phase 6 ends at 0.85 (rest). Phase 7 starts.
                         // However, Index 2 IS the target of Phase 7.
                         // It should be 0 offset. Correct.
-                        else if (isIndex4) { xTransform = dx4; }
-                        else if (isIndex0) { xTransform = dx0; }
+                        else if (isIndex4) { xTransform = dx4; yTransform = dy4; }
+                        else if (isIndex0) { xTransform = dx0; yTransform = dy0; }
                         else if (isIndex1) { xTransform = dx1; yTransform = dy1; }
 
                         return (
@@ -128,13 +134,22 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                 }}
                                 className={`absolute top-0 flex h-full w-full items-center justify-center ${index === 1 ? '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]' : ''} ${index === 2 ? '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]' : ''} ${index === 3 ? '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]' : ''} ${index === 4 ? '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]' : ''} ${index === 5 ? '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]' : ''} ${index === 6 ? '[&>div]:!top-[27.5vh] [&>div]:!left-[29vw] [&>div]:!h-[20vh] [&>div]:!w-[20vw]' : ''} `}
                             >
-                                <div className="relative h-[25vh] w-[25vw]">
+                                <motion.div
+                                    className="relative h-[25vh] w-[25vw]"
+                                    initial={{ opacity: 0, y: 50 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{
+                                        duration: 1.2,
+                                        delay: 0.1 + index * 0.1,
+                                        ease: "easeOut"
+                                    }}
+                                >
                                     <img
                                         src={src || '/placeholder.svg'}
                                         alt={alt || `Parallax image ${index + 1}`}
                                         className="h-full w-full object-cover rounded-lg shadow-lg"
                                     />
-                                </div>
+                                </motion.div>
                             </motion.div>
                         );
                     })}

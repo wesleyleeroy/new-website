@@ -7,21 +7,9 @@ import LiquidCard from "@/components/LiquidCard";
 import ContactSection from "@/components/ContactSection";
 import Marquee from "@/components/Marquee";
 import DockDemo from "@/components/DockDemo";
-import { ZoomParallax } from "@/components/ZoomParallax";
 import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-
-// Images for the ZoomParallax gallery
-const parallaxImages = [
-  { src: "https://picsum.photos/800/600?random=1", alt: "Gallery image 1" },
-  { src: "https://picsum.photos/800/600?random=2", alt: "Gallery image 2" },
-  { src: "https://picsum.photos/800/600?random=3", alt: "Gallery image 3" },
-  { src: "https://picsum.photos/800/600?random=4", alt: "Gallery image 4" },
-  { src: "https://picsum.photos/800/600?random=5", alt: "Gallery image 5" },
-  { src: "https://picsum.photos/800/600?random=6", alt: "Gallery image 6" },
-  { src: "https://picsum.photos/800/600?random=7", alt: "Gallery image 7" },
-];
 
 
 const liquidCards = [
@@ -59,7 +47,7 @@ export default function Home() {
       <HeroSection />
 
       {/* Features Section */}
-      <section className="relative pt-8 pb-32 overflow-hidden" id="features">
+      <section className="relative pt-2 pb-32 overflow-hidden" id="features">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-2">
             <h2 className="text-4xl font-bold text-[#1f487e] mb-4 feature-title">Why Shop With Me?</h2>
@@ -105,7 +93,6 @@ export default function Home() {
       <div id="dock">
         <DockDemo />
       </div>
-      <ZoomParallax images={parallaxImages} />
     </>
   );
 }

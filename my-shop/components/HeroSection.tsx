@@ -29,7 +29,7 @@ export default function HeroSection() {
     const [isHoveredContact, setIsHoveredContact] = useState(false);
 
     return (
-        <header className="relative w-full pt-20 lg:pt-32 pb-8" id="hero">
+        <header className="relative w-full pt-20 lg:pt-32 pb-2" id="hero">
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#cec0b3]/20 rounded-full blur-3xl pointer-events-none opacity-70"></div>
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#71b4c3]/20 rounded-full blur-3xl pointer-events-none opacity-70"></div>
             <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8 flex flex-col items-center">
@@ -42,88 +42,9 @@ export default function HeroSection() {
                         <span className="text-reveal text-3xl sm:text-5xl text-gradient bg-gradient-to-r from-[#01baef] via-[#107e92] to-[#1f487e]">UPenn 2029</span>
                     </div>
                 </h1>
-                <p className="hero-description mx-auto max-w-2xl text-lg text-slate-500 mb-10 leading-relaxed">
-                    Discover a curated collection of premium digital and physical goods. <br />
-                    Simple, secure, and friendly transactions.
+                <p className="hero-description mx-auto max-w-2xl text-lg text-slate-500 mb-2 leading-relaxed">
+                    A Penn Engineering Artificial Intelligence student interested in combining AI and business to make the world a better place.
                 </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                    <motion.div
-                        className="glow-btn-wrapper fade-up"
-                        style={{ '--btn-radius': '1rem' } as React.CSSProperties}
-                        onMouseEnter={() => setIsHoveredBrowse(true)}
-                        onMouseLeave={() => setIsHoveredBrowse(false)}
-                        animate={{
-                            y: isHoveredBrowse ? -3 : 0,
-                        }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                        <span className="btn-border-base"></span>
-                        <span className="btn-glow"></span>
-                        <motion.a
-                            id="shine-btn"
-                            href="#inventory"
-                            className="relative w-[200px] h-[50px] rounded-2xl overflow-hidden cursor-pointer border-2 border-black"
-                            initial={{
-                                boxShadow: "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)"
-                            }}
-                            animate={{
-                                boxShadow: isHoveredBrowse
-                                    ? "0 18px 50px -5px rgba(0, 0, 0, 0.6), 0 25px 60px -10px rgba(11, 6, 252, 0.8), 0 15px 40px -5px rgba(125, 123, 244, 0.6), 0 0 70px -10px rgba(93, 89, 232, 0.5)"
-                                    : "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)",
-                            }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
-                        >
-                            {/* Background */}
-                            <div className="absolute inset-0 bg-black rounded-2xl" />
-
-                            {/* Liquid layers */}
-                            <Liquid isHovered={isHoveredBrowse} colors={defaultColors} />
-
-                            {/* Content */}
-                            <div className="absolute inset-0 flex items-center justify-center gap-2 z-10">
-                                <span className="text-white text-lg font-bold">Start Browsing</span>
-                            </div>
-                        </motion.a>
-                    </motion.div>
-                    <motion.div
-                        className="glow-btn-wrapper fade-up"
-                        style={{ '--btn-radius': '1rem' } as React.CSSProperties}
-                        onMouseEnter={() => setIsHoveredContact(true)}
-                        onMouseLeave={() => setIsHoveredContact(false)}
-                        animate={{
-                            y: isHoveredContact ? -3 : 0,
-                        }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                        <span className="btn-border-base"></span>
-                        <span className="btn-glow"></span>
-                        <motion.a
-                            id="contact-btn"
-                            href="#contact"
-                            className="relative w-[200px] h-[50px] rounded-2xl overflow-hidden cursor-pointer border-2 border-black"
-                            initial={{
-                                boxShadow: "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)"
-                            }}
-                            animate={{
-                                boxShadow: isHoveredContact
-                                    ? "0 18px 50px -5px rgba(0, 0, 0, 0.6), 0 25px 60px -10px rgba(11, 6, 252, 0.8), 0 15px 40px -5px rgba(125, 123, 244, 0.6), 0 0 70px -10px rgba(93, 89, 232, 0.5)"
-                                    : "0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 15px 40px -10px rgba(11, 6, 252, 0.6), 0 8px 20px -5px rgba(125, 123, 244, 0.4)",
-                            }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
-                        >
-                            {/* Background */}
-                            <div className="absolute inset-0 bg-black rounded-2xl" />
-
-                            {/* Liquid layers */}
-                            <Liquid isHovered={isHoveredContact} colors={defaultColors} />
-
-                            {/* Content */}
-                            <div className="absolute inset-0 flex items-center justify-center gap-2 z-10">
-                                <span className="text-white text-lg font-bold">Contact Me</span>
-                            </div>
-                        </motion.a>
-                    </motion.div>
-                </div>
             </div>
         </header>
     );
