@@ -145,16 +145,28 @@ export function useGSAPAnimations() {
             });
         });
 
-        // Liquid cards
+        // Liquid cards - left slides from left, right slides from right
         gsap.utils.toArray<HTMLElement>(".liquid-card-container").forEach((card, index) => {
-            gsap.set(card, { opacity: 0, y: 60 });
+            // Left card (index 0): slide from left
+            // Center card (index 1): slide from bottom
+            // Right card (index 2): slide from right
+            const isLeft = index === 0;
+            const isRight = index === 2;
+
+            gsap.set(card, {
+                opacity: 0,
+                x: isLeft ? -120 : isRight ? 120 : 0,
+                y: !isLeft && !isRight ? 60 : 0
+            });
+
             gsap.to(card, {
-                scrollTrigger: { trigger: card, start: "top 85%", toggleActions: "play none none none" },
+                scrollTrigger: { trigger: card, start: "top 75%", toggleActions: "play none none none" },
                 opacity: 1,
+                x: 0,
                 y: 0,
-                duration: 1.2,
-                delay: index * 0.15,
-                ease: elementisEase,
+                duration: 2.5,
+                delay: index * 0.2,
+                ease: "power3.out", // Smooth easing
             });
         });
 

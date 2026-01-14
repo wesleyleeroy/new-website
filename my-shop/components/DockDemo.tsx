@@ -66,7 +66,7 @@ const Icons = {
     ),
     researchgate: (props: IconProps) => (
         <img
-            src={`${basePath}/images/research gate logo.png`}
+            src={`${basePath}/images/research%20gate%20logo.png`}
             alt="ResearchGate"
             className={props.className}
             style={{ width: '28px', height: '28px', objectFit: 'contain' }}
@@ -137,6 +137,12 @@ export default function DockDemo() {
                                 aria-label={item.label}
                                 className="flex items-center justify-center w-full h-full rounded-full hover:bg-gray-100 transition-colors text-gray-700"
                                 title={item.label}
+                                onClick={(e) => {
+                                    if (item.label === "Home" && window.location.pathname === "/") {
+                                        e.preventDefault();
+                                        window.scrollTo({ top: 0, behavior: "smooth" });
+                                    }
+                                }}
                             >
                                 <item.icon className="w-5 h-5" />
                             </Link>
