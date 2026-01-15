@@ -41,7 +41,7 @@ const glassButtonTextVariants = cva(
 
 export interface GlassButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof glassButtonVariants> {
+  VariantProps<typeof glassButtonVariants> {
   contentClassName?: string;
 }
 

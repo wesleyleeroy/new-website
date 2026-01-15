@@ -7,6 +7,7 @@ import LiquidCard from "@/components/LiquidCard";
 import ContactSection from "@/components/ContactSection";
 import Marquee from "@/components/Marquee";
 import DockDemo from "@/components/DockDemo";
+
 import CurvedImageScroll from "@/components/CurvedImageScroll";
 import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
@@ -93,6 +94,7 @@ export default function Home() {
 
       <ContactSection />
       <Marquee />
+
       <div id="dock">
         <DockDemo />
       </div>

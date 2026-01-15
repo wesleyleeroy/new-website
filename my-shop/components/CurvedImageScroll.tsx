@@ -2,13 +2,11 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useEffect, useState } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function CurvedImageScroll() {
     const containerRef = useRef(null);
-    const overlayRef = useRef<HTMLDivElement>(null);
-    const maskCanvasRef = useRef<HTMLCanvasElement>(null);
-    const isMaskUpdatePending = useRef(false);
+    const [isRevealed, setIsRevealed] = useState(false);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -21,60 +19,18 @@ export default function CurvedImageScroll() {
 
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-    // Initialize Mask: Black = Opaque (Visible Glass)
+    // "Gift Opening" Reveal Animation
+    // -25% = Full Blur (No hole), 150% = Full Clear (Hole covers everything)
+    const targetMaskSize = useMotionValue(-25);
+    const revealVal = useSpring(targetMaskSize, { stiffness: 100, damping: 20 });
+
     useEffect(() => {
-        const canvas = maskCanvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+        targetMaskSize.set(isRevealed ? 150 : -25);
+    }, [isRevealed, targetMaskSize]);
 
-        // Black mask makes the overlay visible
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, 400, 520);
-
-        if (overlayRef.current) {
-            const dataUrl = canvas.toDataURL();
-            overlayRef.current.style.maskImage = `url(${dataUrl})`;
-            overlayRef.current.style.webkitMaskImage = `url(${dataUrl})`;
-        }
-    }, []);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const canvas = maskCanvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
-
-        const rect = canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        // Scratch Effect: Cut hole in mask (destination-out)
-        ctx.globalCompositeOperation = "destination-out";
-        const brushRadius = 100;
-        const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, brushRadius);
-        gradient.addColorStop(0, "rgba(0, 0, 0, 1)");
-        gradient.addColorStop(0.5, "rgba(0, 0, 0, 0.5)");
-        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(mouseX, mouseY, brushRadius, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Throttle Mask Sync
-        if (!isMaskUpdatePending.current) {
-            isMaskUpdatePending.current = true;
-            requestAnimationFrame(() => {
-                if (overlayRef.current) {
-                    const dataUrl = canvas.toDataURL();
-                    overlayRef.current.style.maskImage = `url(${dataUrl})`;
-                    overlayRef.current.style.webkitMaskImage = `url(${dataUrl})`;
-                }
-                isMaskUpdatePending.current = false;
-            });
-        }
-    };
+    const maskImage = useTransform(revealVal, (val) =>
+        `radial-gradient(circle at center, transparent ${val}%, black ${val + 25}%)`
+    );
 
     return (
         <section ref={containerRef} className="py-24 overflow-hidden relative flex flex-col items-center justify-center min-h-[120vh]">
@@ -91,35 +47,43 @@ export default function CurvedImageScroll() {
                     x,
                     rotate,
                     opacity,
-                    boxShadow: "0 35px 60px -15px rgba(0, 0, 0, 0.6), 0 0 40px 10px rgba(31, 72, 126, 0.5), 0 0 80px 20px rgba(100, 160, 255, 0.3)"
+                    boxShadow: "0 35px 60px -15px rgba(0, 0, 0, 0.6), 0 0 40px 10px rgba(31, 72, 126, 0.5), 0 0 80px 20px rgba(100, 160, 255, 0.3)",
+                    willChange: "transform, opacity"
                 }}
-                className="w-[400px] h-[520px] rounded-3xl overflow-hidden relative z-10 group"
-                onMouseMove={handleMouseMove}
+                className="w-[400px] h-[520px] rounded-3xl overflow-hidden relative z-10 group cursor-pointer bg-black"
+                onHoverStart={() => setIsRevealed(true)}
+                onClick={() => window.open('https://blog.ese.upenn.edu/ai-freshman-wesley-leeroy-shares-his-experience-at-this-falls-ieee-international-conference-on-data-mining/', '_blank')}
             >
-                {/* Base Image (Revealed) */}
+                {/* 1. Underlying Sharp Image (Revealed when mask opens) */}
                 <img
                     src={`${basePath}/images/blog%20preview.png`}
                     alt="Curved Scroll Art"
-                    className="w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover"
                 />
 
-                {/* Glass Button Effect Overlay (Masked) */}
-                <div
-                    ref={overlayRef}
-                    className="absolute inset-0 z-20 pointer-events-none rounded-3xl overflow-hidden glass-button-wrap"
+                {/* 2. Overlying Blurred Image + Glass Effect (Hidden when mask opens) */}
+                {/* We blur this IMAGE instead of using backdrop-filter. Much faster. */}
+                <motion.div
+                    className="absolute inset-0 z-20 pointer-events-none rounded-3xl overflow-hidden"
+                    style={{
+                        maskImage,
+                        WebkitMaskImage: maskImage,
+                        willChange: "mask-image"
+                    }}
                 >
-                    {/* Inner Glass Element mimicking GlassButton structure but full size */}
-                    <div className="glass-button absolute inset-0 w-full h-full !rounded-3xl border border-white/20"></div>
-                    <div className="glass-button-shadow absolute inset-0 w-full h-full !rounded-3xl"></div>
-                </div>
+                    {/* The Blurred Image */}
+                    <img
+                        src={`${basePath}/images/blog%20preview.png`}
+                        alt="Curved Scroll Art Blur"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        style={{ filter: "blur(20px) saturate(180%)", transform: "scale(1.1)" }} // Scale slightly to hide blur edges
+                    />
 
-                {/* Mask Canvas (Hidden) */}
-                <canvas
-                    ref={maskCanvasRef}
-                    width={400}
-                    height={520}
-                    className="hidden"
-                />
+                    {/* Glass Overlay Texture (Border/Shine) sitting on top of the blurred image */}
+                    {/* Added Yellow/Gold Tint */}
+                    <div className="absolute inset-0 w-full h-full rounded-3xl border border-yellow-200/30 bg-yellow-500/20 shadow-[inset_0_0_40px_rgba(255,215,0,0.3)] mix-blend-overlay"></div>
+                    <div className="absolute inset-0 w-full h-full rounded-3xl bg-yellow-400/10"></div>
+                </motion.div>
             </motion.div>
         </section>
     );
