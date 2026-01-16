@@ -9,13 +9,13 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 // Images for the ZoomParallax gallery (exact same as home page)
 const parallaxImages = [
+    { src: `${basePath}/images/me solo.jpeg`, alt: "Me Solo" },
     { src: `${basePath}/images/naach.jpeg`, alt: "Naach" },
-    { src: "https://picsum.photos/800/600?random=2", alt: "Gallery image 2" },
-    { src: "https://picsum.photos/800/600?random=3", alt: "Gallery image 3" },
-    { src: "https://picsum.photos/800/600?random=4", alt: "Gallery image 4" },
-    { src: "https://picsum.photos/800/600?random=5", alt: "Gallery image 5" },
-    { src: "https://picsum.photos/800/600?random=6", alt: "Gallery image 6" },
-    { src: "https://picsum.photos/800/600?random=7", alt: "Gallery image 7" },
+    { src: `${basePath}/images/grad.jpeg`, alt: "Graduation" },
+    { src: `${basePath}/images/diving.jpeg`, alt: "Diving" },
+    { src: `${basePath}/images/pfp.jpeg`, alt: "Profile Picture" },
+    { src: `${basePath}/images/class board.jpeg`, alt: "Class Board" },
+    { src: `${basePath}/images/bfs.jpeg`, alt: "BFS" },
 ];
 
 export default function PersonalLife() {

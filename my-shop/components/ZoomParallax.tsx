@@ -56,19 +56,19 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
     // P1 (0.07): 0,0
     // P2 (0.21): Top (-11vw, 64vh)
     // P3 (0.35): Right (-82.5vw, 0vh)
-    // P4 (0.50): BotRight (-87vw, -82.5vh)
-    // P5 (0.64): BotMid (-15vw, -82.5vh)
-    // P6 (0.78): BotLeft (67.5vw, -82.5vh)
+    // P4 (0.50): BotRight (-60vw, -90vh) - centered on image at left-[20vw] top-[30vh]
+    // P5 (0.64): BotMid (-6vw, -90vh) - centered on image at left-[2vw] top-[30vh]
+    // P6 (0.78): BotLeft (57vw, -90vh) - centered on image at -left-[19vw] top-[30vh]
     // P7 (0.92): Left (53.75vw, 21.5vh)
     const containerX = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "-11vw", "0vw", "-82.5vw", "0vw", "-87vw", "0vw", "-15vw", "0vw", "67.5vw", "0vw", "53.75vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "-11vw", "0vw", "-82.5vw", "0vw", "-60vw", "0vw", "-6vw", "0vw", "57vw", "0vw", "53.75vw", "0vw"]);
 
     const containerY = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vh", "0vh", "0vh", "64vh", "0vh", "0vh", "0vh", "-82.5vh", "0vh", "-82.5vh", "0vh", "-82.5vh", "0vh", "21.5vh", "0vh"]);
+        ["0vh", "0vh", "0vh", "64vh", "0vh", "0vh", "0vh", "-90vh", "0vh", "-90vh", "0vh", "-90vh", "0vh", "21.5vh", "0vh"]);
 
     // Phase 5 Custom (0.64 Peak): Index 6 Right, Index 3 Right
     const dx6 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "30vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "55vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
     const dy6 = useTransform(scrollYProgress, TIME_POINTS, ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]);
     const dx3 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "50vw", "0vw"]);
@@ -79,7 +79,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
     const dy2 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "-30vh", "0vh", "0vh", "0vh"]);
     const dx4 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "-20vw", "0vw", "-20vw", "0vw", "0vw", "0vw", "30vw", "0vw", "0vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "-20vw", "0vw", "-45vw", "0vw", "0vw", "0vw", "30vw", "0vw", "0vw", "0vw"]);
     const dy4 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vh", "0vh", "0vh", "0vh", "0vh", "30vh", "0vh", "20vh", "0vh", "0vh", "0vh", "0vh", "0vh", "30vh", "0vh"]); // Phase 7 Down
 
@@ -133,7 +133,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                     x: xTransform,
                                     y: yTransform
                                 }}
-                                className={`absolute top-0 flex h-full w-full items-center justify-center ${index === 1 ? '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]' : ''} ${index === 2 ? '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]' : ''} ${index === 3 ? '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]' : ''} ${index === 4 ? '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]' : ''} ${index === 5 ? '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]' : ''} ${index === 6 ? '[&>div]:!top-[27.5vh] [&>div]:!left-[29vw] [&>div]:!h-[20vh] [&>div]:!w-[20vw]' : ''} `}
+                                className={`absolute top-0 flex h-full w-full items-center justify-center ${index === 1 ? '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]' : ''} ${index === 2 ? '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]' : ''} ${index === 3 ? '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]' : ''} ${index === 4 ? '[&>div]:!top-[30vh] [&>div]:!left-[2vw] [&>div]:!h-[28vh] [&>div]:!w-[16vw]' : ''} ${index === 5 ? '[&>div]:!top-[30vh] [&>div]:!-left-[19vw] [&>div]:!h-[24vh] [&>div]:!w-[20vw]' : ''} ${index === 6 ? '[&>div]:!top-[30vh] [&>div]:!left-[20vw] [&>div]:!h-[24vh] [&>div]:!w-[16vw]' : ''} `}
                             >
                                 <motion.div
                                     className="relative h-[25vh] w-[25vw]"
