@@ -39,7 +39,7 @@ export default function PersonalLife() {
                     <div className="text-center">
                         <h1 className="text-5xl font-bold text-[#1f487e] mb-6 feature-title">Personal Life</h1>
                         <p className="text-xl text-slate-500 max-w-2xl mx-auto feature-subtitle">
-                            Just a small collection of my personal interests, hobbies, and life outside of academics.
+                            Just a small collection of my beloved friends, hobbies, and life outside of academics.
                         </p>
                     </div>
                 </div>
