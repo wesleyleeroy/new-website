@@ -25,7 +25,7 @@ export default function PersonalLife() {
         <>
             {/* Background Video */}
             <video className="fixed-bg-video" autoPlay loop muted playsInline preload="auto">
-                <source src={`${basePath}/videos/background final final.mp4`} type="video/mp4" />
+                <source src={`${basePath}/videos/background final final.mp4`} type="video/mp4" onError={(e) => e.stopPropagation()} />
             </video>
 
             {/* Frosted Glass Overlay */}

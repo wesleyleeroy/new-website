@@ -26,8 +26,8 @@ export default function Home() {
   return (
     <>
       {/* Background Video */}
-      <video className="fixed-bg-video" autoPlay loop muted playsInline preload="auto" onError={(e) => console.warn('Video failed to load:', e)}>
-        <source src={`${basePath}/videos/background final final.mp4`} type="video/mp4" />
+      <video className="fixed-bg-video" autoPlay loop muted playsInline preload="auto">
+        <source src={`${basePath}/videos/background final final.mp4`} type="video/mp4" onError={(e) => e.stopPropagation()} />
       </video>
 
       {/* Frosted Glass Overlay */}
