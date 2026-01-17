@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <>
       {/* Background Video */}
-      <video className="fixed-bg-video" autoPlay loop muted playsInline preload="auto">
+      <video className="fixed-bg-video" autoPlay loop muted playsInline preload="auto" onError={(e) => console.warn('Video failed to load:', e)}>
         <source src={`${basePath}/videos/background final final.mp4`} type="video/mp4" />
       </video>
 
@@ -60,7 +60,7 @@ export default function Home() {
         </div>
 
         {/* Liquid Cards - Full Width */}
-        <section className="-mt-8 flex justify-between items-start gap-6 px-4 w-full">
+        <section className="-mt-8 flex justify-center items-start gap-36 px-4 w-full">
           {liquidCards.map((card, i) => (
             <LiquidCard
               key={i}

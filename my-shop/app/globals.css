@@ -455,8 +455,8 @@ body {
 .liquid-card-container {
   perspective: 1000px;
   cursor: pointer;
-  flex: 1;
-  max-width: 420px;
+  flex-shrink: 0;
+  width: 380px;
   transform-style: preserve-3d;
 }
 
