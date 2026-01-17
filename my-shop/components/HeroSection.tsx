@@ -43,7 +43,7 @@ export default function HeroSection() {
                     </div>
                 </h1>
                 <p className="hero-description mx-auto max-w-2xl text-lg text-slate-500 mb-2 leading-relaxed">
-                    A Penn Engineering Artificial Intelligence student interested in combining AI and business to make the world a better place.
+                    A Penn Engineering AI student focused on applying artificial intelligence to real world business problems.
                 </p>
             </div>
         </header>

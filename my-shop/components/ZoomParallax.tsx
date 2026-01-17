@@ -68,20 +68,25 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 
     // Phase 5 Custom (0.64 Peak): Index 6 Right, Index 3 Right
     const dx6 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "55vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
-    const dy6 = useTransform(scrollYProgress, TIME_POINTS, ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]);
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "55vw", "0vw", "50vw", "0vw", "50vw", "0vw"]); // Phase 5 Right, Phase 6 Right, Phase 7 Right
+    const dy6 = useTransform(scrollYProgress, TIME_POINTS,
+        ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "30vh", "0vh"]); // Phase 7 Down
     const dx3 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "50vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "20vw", "0vw", "0vw", "0vw", "0vw", "0vw", "40vw", "0vw", "50vw", "0vw", "80vw", "0vw"]); // Phase 5 Right, Phase 6 Right, Phase 7 Right
     const dy3 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vh", "0vh", "0vh", "30vh", "0vh", "0vh", "0vh", "-20vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]); // Phase 4 Up
+        ["0vh", "0vh", "0vh", "30vh", "0vh", "0vh", "0vh", "-20vh", "0vh", "-30vh", "0vh", "0vh", "0vh", "0vh", "0vh"]); // Phase 4 Up, Phase 5 Up
 
     // Phase 6 Custom (0.78 Peak): Index 2 Up, Index 4 Right
+    // Phase 3 Custom (0.35 Peak): Index 2 Left (when Right image is focused)
+    // Phase 4 Custom (0.50 Peak): Index 2 Left+Up (when Bottom Right image is focused)
+    const dx2 = useTransform(scrollYProgress, TIME_POINTS,
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "-40vw", "0vw", "-35vw", "0vw", "-35vw", "0vw", "0vw", "0vw", "0vw", "0vw"]); // Phase 3 Left, Phase 4 Left, Phase 5 Left
     const dy2 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "-30vh", "0vh", "0vh", "0vh"]);
+        ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "-25vh", "0vh", "-30vh", "0vh", "-30vh", "0vh", "0vh", "0vh"]); // Phase 4 Up, Phase 5 Up, Phase 6 Up
     const dx4 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vw", "0vw", "0vw", "0vw", "0vw", "-20vw", "0vw", "-45vw", "0vw", "0vw", "0vw", "30vw", "0vw", "0vw", "0vw"]);
     const dy4 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vh", "0vh", "0vh", "0vh", "0vh", "30vh", "0vh", "20vh", "0vh", "0vh", "0vh", "0vh", "0vh", "30vh", "0vh"]); // Phase 7 Down
+        ["0vh", "0vh", "0vh", "40vh", "0vh", "30vh", "0vh", "20vh", "0vh", "0vh", "0vh", "0vh", "0vh", "50vh", "0vh"]); // Phase 2 Down (Top focus), Phase 7 Down
 
     // Phase 7 Custom (0.92 Peak): Index 0 Right, Index 1 Right+Up
     const dx0 = useTransform(scrollYProgress, TIME_POINTS,
@@ -92,12 +97,12 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
     const dx1 = useTransform(scrollYProgress, TIME_POINTS,
         ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "30vw", "0vw"]);
     const dy1 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vh", "0vh", "0vh", "0vh", "0vh", "-30vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "-20vh", "0vh"]);
+        ["0vh", "0vh", "0vh", "0vh", "0vh", "-30vh", "0vh", "-40vh", "0vh", "-60vh", "0vh", "-50vh", "0vh", "-50vh", "0vh"]); // Phase 4 Up, Phase 5 Up, Phase 6 Up, Phase 7 Up
 
     const dx5 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "0vw", "-30vw", "0vw", "0vw", "0vw", "0vw", "0vw"]);
+        ["0vw", "0vw", "0vw", "0vw", "0vw", "-35vw", "0vw", "-60vw", "0vw", "-30vw", "0vw", "0vw", "0vw", "0vw", "0vw"]); // Phase 3 Left, Phase 4 Left
     const dy5 = useTransform(scrollYProgress, TIME_POINTS,
-        ["0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]);
+        ["0vh", "0vh", "0vh", "0vh", "0vh", "30vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh", "0vh"]); // Phase 3 Down
 
     return (
         <div ref={container} className="relative h-[1750vh]">
@@ -119,7 +124,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 
                         if (isIndex6) { xTransform = dx6; yTransform = dy6; }
                         else if (isIndex3) { xTransform = dx3; yTransform = dy3; }
-                        else if (isIndex2) { yTransform = dy2; }
+                        else if (isIndex2) { xTransform = dx2; yTransform = dy2; }
                         else if (isIndex4) { xTransform = dx4; yTransform = dy4; }
                         else if (isIndex0) { xTransform = dx0; yTransform = dy0; }
                         else if (isIndex1) { xTransform = dx1; yTransform = dy1; }

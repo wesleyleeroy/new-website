@@ -33,7 +33,7 @@ export default function CurvedImageScroll() {
     );
 
     return (
-        <section ref={containerRef} className="py-24 overflow-hidden relative flex flex-col items-center justify-center min-h-[120vh]">
+        <section ref={containerRef} className="pt-24 pb-0 overflow-hidden relative flex flex-col items-center justify-center min-h-[120vh]">
             <div className="absolute top-32 w-full max-w-7xl px-4 md:px-8 z-20">
                 <h2
                     className="text-6xl font-bold text-[#1f487e] feature-title text-left"

@@ -38,6 +38,19 @@ export default function Navigation() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isHoveredSocials, setIsHoveredSocials] = useState(false);
     const [isHoveredPersonal, setIsHoveredPersonal] = useState(false);
+    const [hasMounted, setHasMounted] = useState(false);
+    const [initialAnimationDone, setInitialAnimationDone] = useState(false);
+
+    // Trigger mount animation after component loads
+    useEffect(() => {
+        const mountTimer = setTimeout(() => setHasMounted(true), 100);
+        // Mark initial animation as done after the slow entrance completes (1s + 100ms buffer)
+        const animationTimer = setTimeout(() => setInitialAnimationDone(true), 1200);
+        return () => {
+            clearTimeout(mountTimer);
+            clearTimeout(animationTimer);
+        };
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -121,9 +134,14 @@ export default function Navigation() {
     };
 
     return (
-        <nav
-            className={`fixed top-0 z-50 w-full bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 transition-transform duration-300 ease-in-out ${isVisible ? "translate-y-0" : "-translate-y-full"
-                }`}
+        <motion.nav
+            className="fixed top-0 z-50 w-full bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/60"
+            initial={{ y: "-100%" }}
+            animate={{ y: hasMounted && isVisible ? 0 : "-100%" }}
+            transition={{
+                duration: initialAnimationDone ? 0.3 : 1,
+                ease: initialAnimationDone ? "easeOut" : [0.25, 0.46, 0.45, 0.94]
+            }}
         >
             <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-20 items-center justify-between overflow-visible">
@@ -166,6 +184,7 @@ export default function Navigation() {
                                 </div>
                             </motion.a>
                         </motion.div>
+                        {/* Contact Button - Commented out, uncomment to restore:
                         <div className="glow-btn-wrapper inline-flex">
                             <span className="btn-border-base"></span>
                             <span className="btn-glow"></span>
@@ -181,6 +200,7 @@ export default function Navigation() {
                                 <span className="relative z-10">Contact</span>
                             </a>
                         </div>
+                        */}
                     </div>
                     <motion.div
                         className="glow-btn-wrapper hidden md:inline-flex"
@@ -228,6 +248,6 @@ export default function Navigation() {
                     </div>
                 </div>
             </div>
-        </nav >
+        </motion.nav>
     );
 }

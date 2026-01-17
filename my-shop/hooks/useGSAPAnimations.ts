@@ -152,11 +152,12 @@ export function useGSAPAnimations() {
             // Right card (index 2): slide from right
             const isLeft = index === 0;
             const isRight = index === 2;
+            const isCenter = index === 1;
 
             gsap.set(card, {
                 opacity: 0,
-                x: isLeft ? -120 : isRight ? 120 : 0,
-                y: !isLeft && !isRight ? 60 : 0
+                x: isLeft ? -250 : isRight ? 250 : 0,
+                y: isCenter ? 150 : 0
             });
 
             gsap.to(card, {
@@ -165,7 +166,7 @@ export function useGSAPAnimations() {
                 x: 0,
                 y: 0,
                 duration: 2.5,
-                delay: index * 0.2,
+                delay: isCenter ? 0.2 : 0, // Left and right slide in together, center slightly after
                 ease: "power3.out", // Smooth easing
             });
         });

@@ -51,11 +51,6 @@ export default function Home() {
       {/* Features Section */}
       <section className="relative pt-2 pb-32 overflow-hidden" id="features">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-2">
-            <h2 className="text-4xl font-bold text-[#1f487e] mb-4 feature-title">Why Shop With Me?</h2>
-            <p className="text-lg text-slate-500 feature-subtitle">A trusted marketplace experience with personal attention</p>
-          </div>
-
           <FeaturesParticleCanvas />
         </div>
 
@@ -79,7 +74,7 @@ export default function Home() {
 
       <CurvedImageScroll />
 
-      {/* UPenn Image Section */}
+      {/* UPenn Image Section - Commented out, uncomment to restore:
       <section className="pt-28 pb-12 relative" id="about">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mt-8 mb-8 flex justify-end">
@@ -91,9 +86,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       <ContactSection />
-      <Marquee />
+      {/* <Marquee /> */}
 
       <div id="dock">
         <DockDemo />
