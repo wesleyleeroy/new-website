@@ -77,7 +77,7 @@ const Icons = {
 const DATA = {
     navbar: [
         { href: "/", icon: HomeIcon, label: "Home" },
-        { href: "https://www.researchgate.net/scientific-contributions/Wesley-Leeroy-2336487418", icon: Icons.researchgate, label: "ResearchGate" },
+        { href: "https://www.researchgate.net/scientific-contributions/Wesley-Leeroy-2338827419", icon: Icons.researchgate, label: "ResearchGate" },
     ],
     contact: {
         social: {
