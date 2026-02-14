@@ -216,6 +216,52 @@ body {
   transform: translateY(40px);
 }
 
+/* Feature Title & Subtitle - pre-hidden to prevent flash before GSAP */
+.feature-title {
+  opacity: 0;
+  transform: translateY(100px) scale(0.95);
+}
+
+.feature-subtitle {
+  opacity: 0;
+  transform: translateY(80px);
+}
+
+/* Personal page slide-up animations (CSS-only, no GSAP) */
+@keyframes personal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(100px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes personal-slide-up-sub {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.personal-title {
+  opacity: 0;
+  animation: personal-slide-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.personal-subtitle {
+  opacity: 0;
+  animation: personal-slide-up-sub 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+}
+
 /* Scale Fade Reveal */
 .scale-fade {
   opacity: 0;
