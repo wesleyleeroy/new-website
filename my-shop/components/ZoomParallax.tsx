@@ -140,22 +140,13 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                 }}
                                 className={`absolute top-0 flex h-full w-full items-center justify-center ${index === 1 ? '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]' : ''} ${index === 2 ? '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]' : ''} ${index === 3 ? '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]' : ''} ${index === 4 ? '[&>div]:!top-[30vh] [&>div]:!left-[2vw] [&>div]:!h-[28vh] [&>div]:!w-[16vw]' : ''} ${index === 5 ? '[&>div]:!top-[30vh] [&>div]:!-left-[19vw] [&>div]:!h-[24vh] [&>div]:!w-[20vw]' : ''} ${index === 6 ? '[&>div]:!top-[30vh] [&>div]:!left-[20vw] [&>div]:!h-[24vh] [&>div]:!w-[16vw]' : ''} `}
                             >
-                                <motion.div
-                                    className="relative h-[25vh] w-[25vw]"
-                                    initial={{ opacity: 0, y: 50 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{
-                                        duration: 1.2,
-                                        delay: 0.1 + index * 0.1,
-                                        ease: "easeOut"
-                                    }}
-                                >
+                                <div className="relative h-[25vh] w-[25vw]">
                                     <img
                                         src={src || '/placeholder.svg'}
                                         alt={alt || `Parallax image ${index + 1}`}
                                         className="h-full w-full object-cover rounded-lg shadow-lg"
                                     />
-                                </motion.div>
+                                </div>
                             </motion.div>
                         );
                     })}

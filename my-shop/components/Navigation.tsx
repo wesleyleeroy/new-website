@@ -41,19 +41,19 @@ export default function Navigation() {
     const [hasMounted, setHasMounted] = useState(false);
     const [initialAnimationDone, setInitialAnimationDone] = useState(false);
 
-    // Trigger mount animation after component loads
+    // Trigger mount animation immediately
     useEffect(() => {
-        const mountTimer = setTimeout(() => setHasMounted(true), 100);
-        // Mark initial animation as done after the slow entrance completes (1s + 100ms buffer)
-        const animationTimer = setTimeout(() => setInitialAnimationDone(true), 1200);
-        return () => {
-            clearTimeout(mountTimer);
-            clearTimeout(animationTimer);
-        };
+        setHasMounted(true);
+        // Mark initial animation as done after the entrance completes
+        const animationTimer = setTimeout(() => setInitialAnimationDone(true), 600);
+        return () => clearTimeout(animationTimer);
     }, []);
 
     useEffect(() => {
         const handleScroll = () => {
+            // Don't react to scroll during the initial entrance animation
+            if (!initialAnimationDone) return;
+
             const currentScrollY = window.scrollY;
 
             // Show navbar when scrolling up, hide when scrolling down
@@ -81,7 +81,7 @@ export default function Navigation() {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("hideNavigation", handleForceHide);
         };
-    }, [lastScrollY]);
+    }, [lastScrollY, initialAnimationDone]);
 
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
         const button = buttonRef.current;
@@ -139,7 +139,7 @@ export default function Navigation() {
             initial={{ y: "-100%" }}
             animate={{ y: hasMounted && isVisible ? 0 : "-100%" }}
             transition={{
-                duration: initialAnimationDone ? 0.3 : 1,
+                duration: initialAnimationDone ? 0.3 : 0.5,
                 ease: initialAnimationDone ? "easeOut" : [0.25, 0.46, 0.45, 0.94]
             }}
         >
