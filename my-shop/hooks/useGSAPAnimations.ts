@@ -106,6 +106,20 @@ export function useGSAPAnimations() {
             });
         });
 
+        // Same tween as .feature-title, entering from the left instead of below
+        const featureTitlesLeft = gsap.utils.toArray<HTMLElement>(".feature-title-left");
+        featureTitlesLeft.forEach((title) => {
+            gsap.set(title, { x: -100, opacity: 0, scale: 0.95 });
+            gsap.to(title, {
+                scrollTrigger: { trigger: title, start: "top 95%", toggleActions: "play none none none" },
+                x: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 2,
+                ease: elementisEase,
+            });
+        });
+
         const featureSubtitles = gsap.utils.toArray<HTMLElement>(".feature-subtitle");
         featureSubtitles.forEach((subtitle) => {
             gsap.set(subtitle, { y: 80, opacity: 0 });

@@ -2,7 +2,6 @@
 
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import FeaturesParticleCanvas from "@/components/FeaturesParticleCanvas";
 import LiquidCard from "@/components/LiquidCard";
 import ContactSection from "@/components/ContactSection";
 import Marquee from "@/components/Marquee";
@@ -51,7 +50,9 @@ export default function Home() {
       {/* Features Section */}
       <section className="relative pt-2 pb-32 overflow-hidden" id="features">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <FeaturesParticleCanvas />
+          <h2 className="text-6xl font-bold text-[#1f487e] feature-title-left text-left h-32 mb-8 flex items-center">
+            Publications
+          </h2>
         </div>
 
         {/* Liquid Cards - Full Width */}

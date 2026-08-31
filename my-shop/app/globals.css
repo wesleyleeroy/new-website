@@ -222,6 +222,12 @@ body {
   transform: translateY(100px) scale(0.95);
 }
 
+/* Same pop-up as .feature-title, but entering from the left */
+.feature-title-left {
+  opacity: 0;
+  transform: translateX(-100px) scale(0.95);
+}
+
 .feature-subtitle {
   opacity: 0;
   transform: translateY(80px);

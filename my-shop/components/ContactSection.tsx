@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { LiquidEffectAnimation } from "@/components/ui/liquid-effect-animation";
 
 export default function ContactSection() {
     const emailBtnRef = useRef<HTMLDivElement>(null);
@@ -30,8 +29,7 @@ export default function ContactSection() {
     return (
         <section className="py-20 relative" id="contact">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                <div className="relative overflow-hidden rounded-[3rem] bg-white border border-slate-100 p-8 md:p-12 text-center soft-shadow contact-card">
-                    <LiquidEffectAnimation />
+                <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-[#01baef]/25 via-white to-[#1f487e]/25 border border-[#01baef]/30 p-8 md:p-12 text-center soft-shadow contact-card">
                     <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#01baef]/5 to-transparent pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col items-center">
                         <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#01baef]/10 text-[#01baef] contact-content">
