@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useId } from "react"
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
 export function LiquidEffectAnimation() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const uniqueId = useId()
@@ -28,7 +30,7 @@ export function LiquidEffectAnimation() {
                     const canvas = document.getElementById('${canvasId}');
                     if (canvas) {
                         const app = LiquidBackground(canvas);
-                        app.loadImage('https://images.unsplash.com/photo-1537240954157-b08dd087e595?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+                        app.loadImage('${basePath}/images/background.jpg');
                         app.liquidPlane.material.metalness = 0.75;
                         app.liquidPlane.material.roughness = 0.25;
                         app.liquidPlane.uniforms.displacementScale.value = 5;
