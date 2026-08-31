@@ -8,11 +8,15 @@ const outfit = Outfit({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
+// Next does not apply basePath to metadata icon URLs, so prefix it by hand the
+// same way the image paths in the pages do.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export const metadata: Metadata = {
   title: "Wesley Leeroy",
   description: "Discover a curated collection of premium digital and physical goods. Simple, secure, and friendly transactions.",
   icons: {
-    icon: "/favicon.png",
+    icon: `${basePath}/images/favicon.png`,
   },
 };
 

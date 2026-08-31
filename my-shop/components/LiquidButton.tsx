@@ -198,10 +198,11 @@ const GradientSvg: React.FC<GradientSvgProps> = ({
                     cy='0'
                     r='1'
                     gradientUnits='userSpaceOnUse'
-                    animate={(isHovered ? variants.hovered : variants.notHovered) as Record<string, any>
-
-                    }
-
+                    // Seed the attribute so the first animation frame has a value to
+                    // read; without it motion writes gradientTransform="undefined".
+                    gradientTransform={gradientTransform[0]}
+                    initial={{ gradientTransform: gradientTransform[0] }}
+                    animate={(isHovered ? variants.hovered : variants.notHovered) as Record<string, any>}
                 >
                     {stopsAnimationArray.map((stopConfigs, index) => (
                         <AnimatePresence key={index}>
