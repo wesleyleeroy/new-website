@@ -14,7 +14,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export const metadata: Metadata = {
   title: "Wesley Leeroy",
-  description: "Discover a curated collection of premium digital and physical goods. Simple, secure, and friendly transactions.",
+  description: "Wesley Leeroy is a Wharton student applying artificial intelligence to real world business and energy problems. Research, publications, and writing.",
   icons: {
     icon: `${basePath}/images/favicon.png`,
   },
